@@ -1,0 +1,22 @@
+<?php
+$watchlist_collection  = $this->getWatchListByCustomer();
+?>
+<table style="width:100%">
+  <tr>
+    <th>Product Name</th>
+    <th>Added Date</th> 
+  </tr>
+<?php foreach($watchlist_collection as $watchlist) {
+	 $product = $this->getProductName($watchlist->getProductId());?>
+	<tr>
+		<td><a target="_blank" href="<?php echo $product->getProductUrl();  ?>"><?php echo $product->getName();?></a></td>
+		<td><?php echo $watchlist->getCreatedDate();?></td>
+	</tr>
+<?php } ?>
+
+<style type="text/css">
+table, th, td {
+    border: 1px solid black;
+}
+</style>
+

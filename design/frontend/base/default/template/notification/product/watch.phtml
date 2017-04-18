@@ -1,0 +1,44 @@
+<?php echo Augment_Notification_Model_Notify::NOTIFY_TYPE;
+$product_watch = $this->getWatchDetails(Mage::registry('current_product')->getId());
+$item = $product_watch->getFirstItem(); 
+$watch = ($item['watch_status'])?1:0; 
+$checked = ($watch)?"checked":" ";
+?>	
+<input type="checkbox" name="product_watch" id="product_watch" value="<?php echo $watch ?>" <?php echo $checked?> ></br>
+<span class="notify_msg success"></span>
+<script type="text/javascript">
+	$j( document ).ready(function() {
+		var baseUrl="<?php echo Mage::getBaseUrl();?>";
+		var product_id = "<?php echo Mage::registry('current_product')->getId();?>";
+		console.log('working');
+		$j("input:checkbox#product_watch").click(function() {
+                    var ischecked= $j(this).is(':checked');
+                    if(!ischecked)
+                    var watch = ($j(this).val());
+                    else 
+                      var watch = ($j(this).val());
+                    
+				$j.ajax({
+					url :baseUrl+"notification/index/index",
+					type: "POST",
+					data: "watch="+watch+"&product_id="+product_id,
+					success: function(data) {
+						var data = JSON.parse(data);
+						$j('#product_watch').val(data.value)
+						$j('.notify_msg').text(data.msg);
+						$j( '.success' ).fadeIn( 300 ).delay( 1500 ).fadeOut( 400 ); 
+					}
+				});
+        }); 
+		
+	});
+	
+</script>
+<style type="text/css">
+.success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    display: none;
+}
+</style>

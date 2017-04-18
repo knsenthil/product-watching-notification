@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<catalog_product_view>
+		<reference name="product.info">
+			 <block type="augment_notification/product_watch" name="product_watch" as="product.watch" template="notification/product/watch.phtml"/>
+		</reference>
+	</catalog_product_view>
+	
+	<customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink">
+                <name>Watching Products</name>
+                <path>notification/index/watchlist</path>
+                <label>Watching Products</label>
+            </action>
+        </reference>
+    </customer_account>
+    
+    <notification_index_watchlist>
+		<reference name="content">
+			<block type="augment_notification/customer_watchlist" name="watchlist" template="notification/customer/watchlist.phtml"/>
+		</reference>
+    </notification_index_watchlist>
+</layout>
+
